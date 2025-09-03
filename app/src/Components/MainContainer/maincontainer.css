@@ -1,0 +1,12 @@
+.main-container
+{
+    flex:1;
+    /*width:100dvw;*/
+    padding:8px;
+    display:flex;
+    flex-flow: column;
+    /*justify-content: center;*/
+    align-items: center;
+    position: relative;
+    /*background-color: blanchedalmond;*/
+}

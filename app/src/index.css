@@ -1,0 +1,14 @@
+html, body, #root
+{
+    /*position: relative;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;*/
+    font-family: 'Roboto', Arial;
+    /*height: 100dvh;*/
+    overflow-x: hidden;
+    /*min-width: 500px;*/
+    margin: 0;
+    /*padding: 0;*/
+    height:100%;
+}
