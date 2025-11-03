@@ -156,6 +156,7 @@
     max-width:100%;
     word-wrap:break-word;
     overflow-wrap: break-word;
+    white-space: pre-wrap;
 }
 textarea.Description
 {
