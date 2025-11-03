@@ -13,6 +13,10 @@ import Tags from './Components/TagStuff/Tags/Tags.jsx'
 import Tag from './Components/TagStuff/Tag/Tag.jsx'
 import TagEdit from './Components/TagStuff/TagEdit/TagEdit.jsx'
 import TagCreate from './Components/TagStuff/TagCreate/TagCreate.jsx'
+import Store from './Components/StoreStuff/Store/Store.jsx'
+import Product from './Components/StoreStuff/Product/Product.jsx'
+import ProductEdit from './Components/StoreStuff/ProductEdit/ProductEdit.jsx'
+import ProductCreate from './Components/StoreStuff/ProductCreate/ProductCreate.jsx'
 import Login from './Components/Login&Logout/Login.jsx'
 import Logout from './Components/Login&Logout/Logout.jsx'
 import About from './Components/About/About.jsx'
@@ -29,6 +33,10 @@ const router = createBrowserRouter(
         {path:'about', element:<About />},
         {path:'photos', element:<Photos />},
         {path:'tags', element:<Tags />},
+        {path:'store', element:<Store />},
+        {path:'store/:productID', element:<Product />},
+        {path:'store/:productID/edit', element:<ProductEdit />},
+        {path:'store/create', element:<ProductCreate />},
         {path:'tag/:tagID', element:<Tag />},
         {path:'tag/:tagID/edit', element:<TagEdit />},
         {path:'tag/create', element:<TagCreate />},

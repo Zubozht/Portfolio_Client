@@ -46,11 +46,11 @@ header
     align-items: center;
     padding-top:5px;
 }
-.gotophotos, .gototags
+.gotophotos, .gototags, .gotostore
 {
     padding-right:5px;
 }
-.gototags, .gotobio
+.gototags, .gotostore, .gotobio
 {
     padding-left:5px;
 }
@@ -75,12 +75,12 @@ header
     min-width: 277px;
     /*background-color: aquamarine;*/
 }
-.gotomain, .gotophotos, .gototags, .gotobio
+.gotomain, .gotophotos, .gototags, .gotostore, .gotobio
 {
     text-decoration: none;
     color: inherit;
 }
-.gotophotos, .gototags, .gotobio, .headerdivider
+.gotophotos, .gototags, .gotostore, .gotobio, .headerdivider
 {
     font-size: 0.8em;
     transition-duration: 75ms;
@@ -94,7 +94,7 @@ header
     transition-delay: 2ms;
     color:#4e4e4e45;
 }*/
-.gotophotos:hover, .gototags:hover, .gotobio:hover
+.gotophotos:hover, .gototags:hover, .gotostore:hover, .gotobio:hover
 {
     color: #4e4e4e90;
 }
@@ -116,7 +116,7 @@ header
         width: 100%;
         margin-top:1vh;
     }
-    .gotophotos, .gototags, .gotobio, .headerdivider
+    .gotophotos, .gototags, .gotostore, .gotobio, .headerdivider
     {
         font-size: 1.1em;
     }

@@ -85,6 +85,10 @@ function Header()
                                 Categories
                             </Link>
                             <div className="headerdivider">|</div>
+                            <Link to="/store" className="gotostore">
+                                Store
+                            </Link>
+                            <div className="headerdivider">|</div>
                             <Link to="/about" className="gotobio">
                                 About
                             </Link>
