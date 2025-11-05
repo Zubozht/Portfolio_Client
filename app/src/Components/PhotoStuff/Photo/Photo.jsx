@@ -499,12 +499,12 @@ function Photo(props)
                     <div className={styles.Placeholder}></div>
                     {phototags()}
                     {photoexif()}
-                    {localStorage.getItem("currentUserRoles") && localStorage.getItem("currentUserRoles").includes("Admin") && edilete()}
+                    {localStorage.getItem("currentUserRoles") && localStorage.getItem("currentUserRoles").includes("Admin") && (localStorage.getItem("expires") - new Date(Date.now()).getTime() > 0) && edilete()}
                 </section>
             </div>
         );
     }
-    else if (!isPhoto && localStorage.getItem("currentUserRoles") && localStorage.getItem("currentUserRoles").includes("Admin"))
+    else if (!isPhoto && localStorage.getItem("currentUserRoles") && localStorage.getItem("currentUserRoles").includes("Admin") && (localStorage.getItem("expires") - new Date(Date.now()).getTime() > 0))
     {
         return(
             <div className={styles.PhotoPage}>
@@ -518,7 +518,7 @@ function Photo(props)
                     <div className={styles.Placeholder}></div>
                     {phototags()}
                     {photoexif()}
-                    {localStorage.getItem("currentUserRoles") && localStorage.getItem("currentUserRoles").includes("Admin") && edilete()}
+                    {localStorage.getItem("currentUserRoles") && localStorage.getItem("currentUserRoles").includes("Admin") && (localStorage.getItem("expires") - new Date(Date.now()).getTime() > 0) && edilete()}
                 </section>
             </div>
         );

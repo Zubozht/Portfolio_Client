@@ -91,14 +91,14 @@ function Tag(props)
                     </div>
                     <div className={styles.RightSection}>
                         {/*<Link to={`/tags`} className={styles.ToTagsLink}><div className={styles.ToTagsText}>To Tags →</div></Link>*/}
-                        {localStorage.getItem('currentUserRoles') && localStorage.getItem('currentUserRoles').includes('Admin') && <Link to={`/tag/${tagID}/edit`}><button className={styles.TagEditButton}>Edit</button></Link>}
-                        {localStorage.getItem('currentUserRoles') && localStorage.getItem('currentUserRoles').includes('Admin') && <button className={styles.TagDeleteButton} onClick={handleTagDelete}>Delete</button>}
+                        {localStorage.getItem('currentUserRoles') && localStorage.getItem('currentUserRoles').includes('Admin') && (localStorage.getItem("expires") - new Date(Date.now()).getTime() > 0) && <Link to={`/tag/${tagID}/edit`}><button className={styles.TagEditButton}>Edit</button></Link>}
+                        {localStorage.getItem('currentUserRoles') && localStorage.getItem('currentUserRoles').includes('Admin') && (localStorage.getItem("expires") - new Date(Date.now()).getTime() > 0) && <button className={styles.TagDeleteButton} onClick={handleTagDelete}>Delete</button>}
                     </div>
                 </section>
                 <Grid requestbody={`search, ${JSON.stringify({'tagIDs':[Number(tagID)]})}`}></Grid>
             </>
             )}
-            {editMode && localStorage.getItem('currentUserRoles') && localStorage.getItem('currentUserRoles').includes('Admin') && !isLoading && !fetchError && !notFetched && !photosLoading && !photosError && (
+            {editMode && localStorage.getItem('currentUserRoles') && localStorage.getItem('currentUserRoles').includes('Admin') && (localStorage.getItem("expires") - new Date(Date.now()).getTime() > 0) && !isLoading && !fetchError && !notFetched && !photosLoading && !photosError && (
             <>
                 <section className={styles.Heading}>
                     <div className={styles.LeftSection}>
@@ -113,7 +113,7 @@ function Tag(props)
                 {/*<input type="text" value={tagValue} onChange={editTag}></input>*/}
                 {/*<button onClick={handleTagUpdate}>Submit.</button>*/}
             </>)}
-            {!isTag && localStorage.getItem('currentUserRoles') && localStorage.getItem('currentUserRoles').includes('Admin') && (
+            {!isTag && localStorage.getItem('currentUserRoles') && localStorage.getItem('currentUserRoles').includes('Admin') && (localStorage.getItem("expires") - new Date(Date.now()).getTime() > 0) && (
             <>
                 <section className={styles.Heading}>
                     <div className={styles.LeftSection}>
@@ -131,7 +131,7 @@ function Tag(props)
             </>)}
             {isLoading && <Loading></Loading>}
             {(fetchError || notFetched) && isTag && <Error404></Error404>}
-            {!isTag && (!localStorage.getItem('currentUserRoles') || !localStorage.getItem('currentUserRoles').includes('Admin')) && <Error404></Error404>}
+            {!isTag && (!localStorage.getItem('currentUserRoles') || !localStorage.getItem('currentUserRoles').includes('Admin')) && (localStorage.getItem("expires") - new Date(Date.now()).getTime() > 0) && <Error404></Error404>}
         </>)
 }
 

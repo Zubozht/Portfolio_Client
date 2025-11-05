@@ -52,10 +52,12 @@ function Login(props)
                 {
                     localStorage.setItem('authToken', responsejson.token);
                     localStorage.setItem('currentUserRoles', responsejson.roles);
+                    localStorage.setItem('expires', new Date((Date.now() + 7 * 24 * 60 * 60 * 1000)).getTime());
 
-                    document.cookie=`authToken=${responsejson.token}; expires=` + new Date((Date.now() + 7 * 24 * 60 * 60 * 1000)).toUTCString();
-                    document.cookie=`currentUserRoles=${responsejson.roles}; expires=` + new Date((Date.now() + 7 * 24 * 60 * 60 * 1000)).toUTCString();
-
+                    document.cookie=`authToken=${responsejson.token}`;
+                    document.cookie=`currentUserRoles=${responsejson.roles}`;
+                    document.cookie=(`expires=` + new Date((Date.now() + 7 * 24 * 60 * 60 * 1000)).getTime());
+                    
                     navigate(`/`);
                 }
             }
