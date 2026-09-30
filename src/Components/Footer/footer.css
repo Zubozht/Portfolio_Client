@@ -1,0 +1,36 @@
+footer
+{
+    /*margin-top: auto;*/
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10vh;
+    min-height: 50px;
+    max-height:70.3px;
+    width:100dvw;
+    background-color: #efefef;
+}
+@media (min-width:1024px)
+{
+    footer
+    {
+    /*margin-top: auto;*/
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 11.5vh;
+        min-height: 80px;
+        width:100dvw;
+        background-color: #efefef;
+    }
+}
+.Technical
+{
+    visibility: hidden
+}
+#footerText
+{
+    margin-left: auto;
+    margin-right: 8%;
+    font-size: 0.75em;
+}

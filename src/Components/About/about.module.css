@@ -1,0 +1,31 @@
+.AboutSection
+{
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+}
+.Intro
+{
+    font-size:24px;
+}
+.Icons
+{
+    width: 100%;
+    margin: 5vh 0;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /*background-color: aquamarine;*/
+    height: 50px;
+}
+.InstagramLogo, .ThreadsLogo, .TwitterLogo, .TelegramLogo
+{
+    height: 42.4px;
+    aspect-ratio: 1/1;
+}
+.InstagramLink, .ThreadsLink, .TwitterLink
+{
+    margin-right: 10%;
+}
