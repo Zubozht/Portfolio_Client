@@ -94,9 +94,19 @@ header
     transition-delay: 2ms;
     color:#4e4e4e45;
 }*/
+.gotostore
+{
+    color:#4e4e4e45;
+    cursor:default;
+    pointer-events:none;
+}
 .gotophotos:hover, .gototags:hover, .gotostore:hover, .gotobio:hover
 {
     color: #4e4e4e90;
+}
+.gotostore:hover
+{
+    color:#4e4e4e45;
 }
 #myname
 {

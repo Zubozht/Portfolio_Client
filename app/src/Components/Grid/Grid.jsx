@@ -12,8 +12,9 @@ import { ApiContext } from '../../ApiContext';
 function Grid(props)
 {
     const baseurl = useContext(ApiContext);
-    const { tagPreviews, requestbody="" } = props;
+    const { tagPreviews, productPreviews, requestbody="" } = props;
     const [thisTagPreviews, setThisTagPreviews] = useState(tagPreviews);
+    const [thisProductPreviews, setThisProductPreviews] = useState(productPreviews);
     const [thisRequstBody, setThisRequestBody] = useState(requestbody);
     const {photos, setPhotos, isLoading, fetchError} = useFetchPhotos(thisRequstBody ?? "");
     const navigate = useNavigate();
@@ -28,9 +29,9 @@ function Grid(props)
 
     useEffect(function()
     {
-        if (sessionStorage.getItem('photos') || sessionStorage.getItem('tagPreviews'))
+        if (sessionStorage.getItem('photos') || sessionStorage.getItem('tagPreviews') || sessionStorage.getItem('productPreviews'))
         {
-            if((!tagPreviews && requestbody=="" && sessionStorage.getItem('entity').trim()=='undefined') || (tagPreviews && sessionStorage.getItem('entity').includes('[object Object]')) || (requestbody.includes('search') && sessionStorage.getItem('entity').includes('search')))
+            if((!tagPreviews && !productPreviews && requestbody=="" && sessionStorage.getItem('entity').trim()=='undefined') || ((tagPreviews || productPreviews) && sessionStorage.getItem('entity').includes('[object Object]')) || (requestbody.includes('search') && sessionStorage.getItem('entity').includes('search')))
             {
                 if (sessionStorage.getItem('photos'))
                 {
@@ -39,9 +40,13 @@ function Grid(props)
                 else if (sessionStorage.getItem('tagPreviews'))
                 {
                     setThisTagPreviews(JSON.parse(sessionStorage.getItem('tagPreviews')));
+                }
+                else if (sessionStorage.getItem('productPreviews'))
+                {
+                    setThisProductPreviews(JSON.parse(sessionStorage.getItem('productPreviews')));
                 };
                 
-                if (((!tagPreviews && (JSON.stringify(photos)==sessionStorage.getItem('photos'))) || (tagPreviews && (JSON.stringify(thisTagPreviews)==sessionStorage.getItem('tagPreviews')))) && ((Number(window.innerHeight)+Number(sessionStorage.getItem('scrollposition'))<=Number(document.body.scrollHeight))))
+                if (((!tagPreviews && !productPreviews && (JSON.stringify(photos)==sessionStorage.getItem('photos'))) || (tagPreviews && (JSON.stringify(thisTagPreviews)==sessionStorage.getItem('tagPreviews'))) || (productPreviews && (JSON.stringify(thisProductPreviews)==sessionStorage.getItem('productPreviews')))) && ((Number(window.innerHeight)+Number(sessionStorage.getItem('scrollposition'))<=Number(document.body.scrollHeight))))
                 {
                     if (sessionStorage.getItem('scrollposition'))
                     {
@@ -49,6 +54,7 @@ function Grid(props)
                     }
                     sessionStorage.removeItem('photos');
                     sessionStorage.removeItem('tagPreviews');
+                    sessionStorage.removeItem('productPreviews');
                     sessionStorage.removeItem('scrollposition');
                     sessionStorage.removeItem('entity');
                 };
@@ -61,7 +67,7 @@ function Grid(props)
                 sessionStorage.removeItem('entity');
             });*/
         }
-    }, [isLoading, document.body.scrollHeight, thisTagPreviews || photos]);
+    }, [isLoading, document.body.scrollHeight, thisTagPreviews || thisProductPreviews || photos]);
 
     useEffect(function()
     {
@@ -80,13 +86,18 @@ function Grid(props)
 
     const generatephotos = function()
     {
-        if (!isLoading && !fetchError && !tagPreviews && imagesAreLoaded)
+        if (!isLoading && !fetchError && !tagPreviews && !productPreviews && imagesAreLoaded)
         {
-            return(photos.map(x => <div className={styles.GridCard} key={x.id}><Link to={`/photo/${x.id}`} className = {styles.PhotoLink} key={x.id} onClick={function(){sessionStorage.setItem('scrollposition',document.body.scrollTop);sessionStorage.setItem('photos',JSON.stringify(photos));sessionStorage.setItem('entity',`${requestbody} ${tagPreviews}`);}}><img key={x.id} className = {styles.GridPhotoCard} src={`${baseurl}/photo/previewimage/${x.id}?${0/*Date.now()*/}`} alt ={`Photo ${x.id}`}/></Link></div>));
+            return(photos.map(x => <div className={styles.GridCard} key={x.id}><Link to={`/photo/${x.id}`} className = {styles.PhotoLink} key={x.id} onClick={function(){sessionStorage.setItem('scrollposition',document.body.scrollTop);sessionStorage.setItem('photos',JSON.stringify(photos));sessionStorage.setItem('entity',`${requestbody} ${tagPreviews || productPreviews}`);}}><img key={x.id} className = {styles.GridPhotoCard} src={`${baseurl}/photo/previewimage/${x.id}?${0/*Date.now()*/}`} alt ={`Photo ${x.id}`}/></Link></div>));
         }
         else if (tagPreviews && tagPreviews.length>0 && imagesAreLoaded)
         {
             return(thisTagPreviews.map(x => <div className={styles.GridCard} key={x.id}><Link to={`/tag/${x.id}`} className = {styles.PhotoLink} key={x.id} onClick={function(){sessionStorage.setItem('scrollposition',document.body.scrollTop);sessionStorage.setItem('tagPreviews',JSON.stringify(thisTagPreviews));;sessionStorage.setItem('entity',`${requestbody} ${thisTagPreviews}`);}}><img key={x.id} className = {styles.GridPhotoCard} src={`${baseurl}/tag/previewimage/${x.id}?${0/*Date.now()*/}`} alt ={`Tag ${x.id}`}/><div className={styles.TagName}><h2 className={styles.TagText}>{x.tag}</h2></div></Link></div>)); 
+        }
+        else if (productPreviews && productPreviews.length>0 && imagesAreLoaded)
+        {
+            console.log(thisProductPreviews);
+            return(thisProductPreviews.map(x => <div className={styles.GridCard} key={x.id}><Link to={`/store/${x.id}`} className = {styles.PhotoLink} key={x.id} onClick={function(){sessionStorage.setItem('scrollposition',document.body.scrollTop);sessionStorage.setItem('productPreviews',JSON.stringify(thisProductPreviews));;sessionStorage.setItem('entity',`${requestbody} ${thisProductPreviews}`);}}><img key={x.id} className = {styles.GridPhotoCard} src={`${baseurl}/product/productpreviewimage/${x.id}?${0/*Date.now()*/}`} alt ={`Product ${x.id}`}/><div className={styles.TagName}><h2 className={styles.TagText}>{x.product}</h2></div></Link></div>)); 
         }
         else
         {

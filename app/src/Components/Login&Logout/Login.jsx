@@ -73,6 +73,7 @@ function Login(props)
     {
         localStorage.removeItem("authToken");
         localStorage.removeItem("currentUserRoles");
+        localStorage.removeItem("expires");
         navigate(`/`);
     };
 
@@ -82,7 +83,7 @@ function Login(props)
     {
         async function redirector()
         {
-            if (logout && (!localStorage.getItem('currentUserRoles') || localStorage.getItem('currentUserRoles') == null))
+            if (logout && (!localStorage.getItem('currentUserRoles') || localStorage.getItem('currentUserRoles') == null || (!localStorage.getItem("expires") || localStorage.getItem("expires") - new Date(Date.now()).getTime() <= 0)))
             {
                 setLogout(false);
                 navigate(`/login`);
@@ -99,6 +100,8 @@ function Login(props)
                 {
                     localStorage.removeItem("authToken");
                     localStorage.removeItem('currentUserRoles')
+                    localStorage.removeItem("expires");
+                    navigate(`/login`)
                 }
                 else
                 {

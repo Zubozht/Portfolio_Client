@@ -6,7 +6,8 @@ import { ApiContext } from './ApiContext.jsx'
 
 function App() {
 
-  const apiurl = "https://api.viktormarchenkophoto.com";
+  const apiurl = "https://api.marchenkophoto.com";
+  //const apiurl = "http://localhost:5100"
 
   return (
     <ApiContext.Provider value={apiurl}>

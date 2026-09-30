@@ -35,6 +35,7 @@ function Photo(props)
     const [uploadedImage, setUploadedImage] = useState();
     const [caption, setCaption] = useState('');
     const [description, setDescription] = useState('');
+    const [sortorder, setSortorder] = useState(1);
     const [imagePath, setImagePath] = useState(``);
     const [butClicked, setButClicked] = useState(false);
     const [fileUploaded, setFileUploaded] = useState(false);
@@ -51,6 +52,7 @@ function Photo(props)
             setImagePath(`${baseurl}/photo/image/${photo.id}?${Date.now()}`);
             setCaption(photo.caption);
             setDescription(photo.description);
+            setSortorder(photo.sortorder)
         };
     }, [isLoading, fetchError, photoID]);
 
@@ -72,6 +74,10 @@ function Photo(props)
     const editDescription = function(e)
     {
         setDescription(e.target?.value);
+    };
+    const editSortOrder = function(sortordershift)
+    {
+        setSortorder(function(currentSortorder){return(currentSortorder > 1 | sortordershift > 0 ? currentSortorder + sortordershift : 1)});
     };
     const enterTag = function(e)
     {
@@ -108,6 +114,7 @@ function Photo(props)
                 };
                 formData.append("caption", caption);
                 formData.append("description", description);
+                formData.append("sortorder", sortorder);
                 newtagids.forEach(x => formData.append("tags", x));
 
                 let response;
@@ -435,15 +442,28 @@ function Photo(props)
                             </dl>
                         </fieldset>
                     </div>
-                )
+                );
             }
             else
             {
                 return(
                     <></>
-                )
+                );
             };
     };
+
+    const sortordercontrols = function()
+    {
+        if ((photoID && !isPending && editMode) || (!photoID && !isPending))
+        {
+            return(
+                <div className={styles.SortorderButtons}>
+                    <button className={styles.SortorderUpButton} onClick={function(){editSortOrder(-1)}}><span>↑</span></button>
+                    <button className={styles.SortorderDownButton} onClick={function(){editSortOrder(1)}}><span>↓</span></button>
+                </div>
+            );
+        }
+    }
 
     const edilete = function()
     {
@@ -455,7 +475,7 @@ function Photo(props)
                     <Link to={`/photo/${photoID}/edit`} className={styles.PhotoEditLink}><button className={styles.PhotoEditButton}>Edit</button></Link>
                     <button className={styles.PhotoDeleteButton} onClick={handleDelete}>Delete</button>
                 </div>
-            )
+            );
         }
         else if (!isPending && editMode)
         {
@@ -464,7 +484,7 @@ function Photo(props)
                     <button className={styles.PhotoSaveButton} onClick={async function(){setIsPending(true); await handleUpdate();}}>Save</button>
                     <Link to={`/photo/${photoID}`} className={styles.PhotoDiscardLink}><button className={styles.PhotoDiscardButton}>Discard</button></Link>
                 </div>
-            )
+            );
         }
         else if (!isPending)
         {   
@@ -499,6 +519,7 @@ function Photo(props)
                     <div className={styles.Placeholder}></div>
                     {phototags()}
                     {photoexif()}
+                    {localStorage.getItem("currentUserRoles") && localStorage.getItem("currentUserRoles").includes("Admin") && (localStorage.getItem("expires") - new Date(Date.now()).getTime() > 0) && sortordercontrols()}
                     {localStorage.getItem("currentUserRoles") && localStorage.getItem("currentUserRoles").includes("Admin") && (localStorage.getItem("expires") - new Date(Date.now()).getTime() > 0) && edilete()}
                 </section>
             </div>
@@ -518,6 +539,7 @@ function Photo(props)
                     <div className={styles.Placeholder}></div>
                     {phototags()}
                     {photoexif()}
+                    {localStorage.getItem("currentUserRoles") && localStorage.getItem("currentUserRoles").includes("Admin") && (localStorage.getItem("expires") - new Date(Date.now()).getTime() > 0) && sortordercontrols()}
                     {localStorage.getItem("currentUserRoles") && localStorage.getItem("currentUserRoles").includes("Admin") && (localStorage.getItem("expires") - new Date(Date.now()).getTime() > 0) && edilete()}
                 </section>
             </div>
