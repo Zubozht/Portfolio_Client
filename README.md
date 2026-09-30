@@ -6,5 +6,5 @@ Features:
 - photo pages with descriptions and metadata
 - the project uses full potential of React and relies strongly on reusable components
 
-Backend: [link](https://github.com/Zubozht/Portfolio_API)
+Backend: [link](https://github.com/Zubozht/Portfolio_API)  
 Live website: [link](https://marchenkophoto.com)
