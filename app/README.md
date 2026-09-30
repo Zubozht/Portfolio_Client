@@ -1,8 +1,10 @@
-# React + Vite
+Frontend for my personal photography portfolio website, built with React and connected to a custom ASP.NET Core REST API.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Features:  
+- gallery with masonry layout
+- tags/categories
+- photo pages with descriptions and metadata
+- the project uses full potential of React and relies strongly on reusable components
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Backend: [link](https://github.com/Zubozht/Portfolio_API)
+Live website: [link](https://marchenkophoto.com)
