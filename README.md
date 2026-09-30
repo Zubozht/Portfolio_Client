@@ -1,6 +1,6 @@
 Frontend for my personal photography portfolio website, built with React and connected to a custom ASP.NET Core REST API.
 
-Features:  
+Features:
 - gallery with masonry layout
 - tags/categories
 - photo pages with descriptions and metadata
